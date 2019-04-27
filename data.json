@@ -1,0 +1,27 @@
+[{
+  "nama": "Buku",
+  "kelas": {
+    "sepuluh": [{
+      "name": "Pendidikan Agama Kelas X",
+      "kelas": "X (Sepuluh)",
+      "semester": {
+        "ganjil": [{
+          "namasemester":"Semester 1",
+          "semester" : "1",
+          "pengarang": "Makoto Shinkai",
+          "penerbit": "Penerbit Indonesia",
+          "halaman": "222",
+          "gambar": "pai.png"
+        }],
+        "genap": [{
+          "namasemester":"Semester 2",
+          "semester" : "2",
+          "pengarang": "Masashi Kishimoto",
+          "penerbit": "Penerbit Jakarta",
+          "halaman": "100",
+          "gambar": "ing.jpg"
+        }]
+      }
+    }]
+  }
+}]

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Multidimensional Array</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<style>
+		img{
+			width: 110%;
+			margin-left: -15.6px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row" id="rowed">
+		
+			
+		</div>
+	</div>
+	<template id="templates">
+		<div class="col-4 py-2">
+			<div class="card <color>">
+				<div class="card-content p-3 shadow">
+					<h5 class="card-title"> Buku <namabuku> <namasemester></h5>
+					
+				
+					<p>Kelas : <kelas></p>
+					<p>Semester : <semester></p>
+					<!-- <p>Nama Buku : <namabuku></p> -->
+					
+					<p>Pengarang : <pengarang></p>
+					<p>Penerbit : <penerbit></p>
+					<p>Halaman : <halaman></p>
+					<gambar>
+				</div>
+			</div>
+		</div>
+	</template>		
+</body>
+<script>
+	var template = document.getElementById("templates").innerHTML;
+	
+	let temp = "";
+	var target = document.getElementById("rowed");
+
+	
+
+	var data = fetch('data.json').then(async (result) => {
+		var data = await result.json();
+		
+		data.forEach(async(item)=>{
+			//console.log(item["kelas"].sepuluh[0].semester.ganjil[0]);
+
+			
+			var kelas= item["kelas"];
+		
+			var sepuluh = item["kelas"].sepuluh;
+			var sebelas = item["kelas"].sebelas;	
+			var ganjil = item["kelas"].sepuluh[0]["semester"].ganjil;
+			var genap = item["kelas"].sepuluh[0]["semester"].genap;
+			
+			console.log(kelas);
+
+
+			//kelas.forEach(async(item)=>{
+
+
+				sepuluh.forEach(async(item)=>{
+						
+
+					ganjil.forEach(async(item)=>{
+						temp = temp + template
+						.replace('<nama>',item["nama"])
+						.replace('<namabuku>',sepuluh[0].name)
+						.replace('<color>',"bg-warning")
+						.replace('<semester>',ganjil[0].semester)
+						.replace('<namasemester>',ganjil[0].namasemester)
+						.replace('<pengarang>',ganjil[0].pengarang)
+						.replace('<penerbit>',ganjil[0].penerbit)
+						.replace('<halaman>',ganjil[0].halaman)
+						
+						.replace('<kelas>',sepuluh[0].kelas)
+						.replace('<gambar>',`<img src="${ganjil[0].gambar}">`)
+					});
+
+					genap.forEach(async(item)=>{
+						temp = temp + template
+						.replace('<nama>',item["nama"])
+						.replace('<namabuku>',sepuluh[0].name)
+						.replace('<color>',"bg-success")
+						.replace('<namasemester>',genap[0].namasemester)
+						.replace('<semester>',genap[0].semester)
+						.replace('<pengarang>',genap[0].pengarang)
+						.replace('<penerbit>',genap[0].penerbit)
+						.replace('<halaman>',genap[0].halaman)
+						
+						.replace('<kelas>',sepuluh[0].kelas)
+						.replace('<gambar>',`<img src="${genap[0].gambar}">`)
+					});
+				});
+				
+	
+		});
+
+		target.innerHTML = temp;
+		
+
+	});
+</script>
+</html>
